@@ -14,7 +14,7 @@ done
 git fetch --prune --unshallow 2>/dev/null
 CURRENT_VERSION=`git describe --abbrev=0 --tags 2>/dev/null`
 
-if [[$CURRENT_VERSION == '']]
+if [[ $CURRENT_VERSION == '' ]]
 then CURRENT_VERSION='v0.1.0'
 fi
 echo "Current Version: $CURRENT_VERSION"
@@ -27,13 +27,13 @@ VNUM1=${CURRENT_VERSION_PARTS[0]}
 VNUM2=${CURRENT_VERSION_PARTS[1]}
 VNUM3=${CURRENT_VERSION_PARTS[2]}
 
-if [[$VERSION == "major"]]
+if [[ $VERSION == "major" ]]
 then
     VNUM1=v$((VNUM1+1))
-elif [[$VERSION == "minor"]]
+elif [[ $VERSION == "minor" ]]
 then 
     VNUM2=v$((VNUM2+1))
-elif [[$VERSION == "patch"]]
+elif [[ $VERSION == "patch" ]]
 then 
     VNUM3=v$((VNUM3+1))
 else 
@@ -50,7 +50,7 @@ GIT_COMMIT=`git rev-parse HEAD`
 NEEDS_TAG=`git describe --contains $GIT_COMMIT 2>/dev/null`
 
 # only tag if no tag already
-if [-z "$NEEDS_TAG"]; then
+if [ -z "$NEEDS_TAG" ]; then
     echo "Tagged with $NEW_TAG"
     git tag $NEW_TAG
     git push --tags
